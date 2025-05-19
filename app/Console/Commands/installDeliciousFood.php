@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Process;
 
+
 class installDeliciousFood extends Command
 {
     /**
@@ -26,15 +27,6 @@ class installDeliciousFood extends Command
      */
     public function handle(): void
     {
-        $this->info('installing packages');
-        $install = Process::timeout(360)->run('composer install && npm install');
-
-        if ($install->failed()) {
-            $this->error($install->errorOutput());
-        } else {
-            $this->info('packages installed');
-        }
-
         $this->info('creating .env, generate key and migrate');
         exec('copy .env.example .env', $result);
         $result = Process::timeout(120)->run('php artisan key:generate && php artisan migrate -–seed');
