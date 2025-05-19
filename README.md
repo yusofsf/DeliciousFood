@@ -51,8 +51,8 @@
 
 #### 1. پروژه را clone کنید
 ```bash
-git clone https://github.com/yusofsf/DelicoiusFood.git
-cd DelicoiusFood
+git clone https://github.com/yusofsf/DeliciousFood.git
+cd DeliciousFood
 ```
 
 #### 2.نصب با command
