@@ -37,7 +37,7 @@ Route::post('/email/verification-notification', function (Request $request) {
     return Response::json([
         'message' => 'email verification link send'
     ]);
-})->middleware('auth:sanctum')->name('verification.send');
+})->middleware(['auth:sanctum', 'throttle:10,1'])->name('verification.send');
 
 Route::middleware('auth:sanctum')->group(function () {
 
@@ -61,7 +61,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/orders/{order}/cancel', 'cancel');
         Route::get('/orders/{order}/show', 'show');
         Route::get('/orders/cart/confirm', 'confirm');
-    });
+    })->middleware('throttle:20,1');
 
     Route::controller(CartController::class)->group(function () {
         Route::post('/carts/add-to-cart', 'addToCart');
