@@ -35,14 +35,14 @@ class FoodController extends Controller
         $validated = $request->validated();
 
         $image = time() . '.' . $validated['image']->getClientOriginalExtension();
-        $validated['image']->move(public_path('images/' . $validated['type']), $image);
+        $validated['image']->move(public_path('images/' . $validated['type'].'s'), $image);
 
         $newFood = Food::create([
             'name' => $validated['name'],
             'ingredients' => $validated['ingredients'],
             'price' => $validated['price'],
             'type' => $validated['type'],
-            'img_url' => 'images/' . $validated['type'] . '/' . $image,
+            'img_url' => 'images/' . $validated['type'] . 's/' . $image,
         ]);
 
         return Response::json([
