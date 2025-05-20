@@ -173,6 +173,7 @@
 </body>
 <script>
     const isUser = localStorage.getItem('user_role') === 'Costumer';
+    const isAdmin = localStorage.getItem('user_role') === 'Administrator';
 
     let burgers = document.getElementById("burgers")
     let sandwiches = document.getElementById("sandwiches")
@@ -922,6 +923,10 @@
         if (qtyElement) {
             qtyElement.textContent = quantity;
         }
+    }
+
+    if (isAdmin) {
+        document.getElementById('toggleCart').classList.add('hidden')
     }
 
     burgerShow()

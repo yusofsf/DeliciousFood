@@ -21,7 +21,16 @@ class CartService implements CartServiceInterface
     {
         $item = strtolower($type) === 'drink' ? Drink::find($id) : Food::find($id);
 
-        $this->cart->removeItem($item);
+        if (!$item) {
+            return;
+        }
+
+        $cartItem = $this->cart->items()
+            ->where('itemable_id', $id)
+            ->where('itemable_type', get_class($item))
+            ->first();
+
+        $this->cart->removeItem($cartItem);
     }
 
     public function increaseQuantity(string $type, int $id): void
@@ -42,7 +51,7 @@ class CartService implements CartServiceInterface
             return;
         }
 
-        $this->cart->increaseQuantity($item);
+        $this->cart->increaseQuantity($cartItem);
     }
 
     public function addToCart(string $type, int $id): void
@@ -60,7 +69,12 @@ class CartService implements CartServiceInterface
             return;
         }
 
-        $this->cart->decreaseQuantity($item);
+        $cartItem = $this->cart->items()
+            ->where('itemable_id', $id)
+            ->where('itemable_type', get_class($item))
+            ->first();
+
+        $this->cart->decreaseQuantity($cartItem);
     }
 
     public function emptyCart(): void

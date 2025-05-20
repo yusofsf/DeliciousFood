@@ -127,7 +127,6 @@
             });
         }
 
-        // Initial fetch
         fetchExtras();
     </script>
 @endsection
