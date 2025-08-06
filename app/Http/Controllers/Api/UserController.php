@@ -54,7 +54,7 @@ class UserController extends Controller
         Gate::allowIf(fn(User $user) => $user->isUser());
 
         return Response::json([
-            'result' => Auth::user()->orderItems()->whereIn('type', [FoodType::Sandwich->value, FoodType::Burger->value])->get(),
+            'result' => Auth::user()->orderItems()->whereIn('type', [FoodType::SANDWICH->value, FoodType::BURGER->value])->get(),
             'message' => 'All User foods ordered'
         ]);
     }
@@ -64,7 +64,7 @@ class UserController extends Controller
         Gate::allowIf(fn(User $user) => $user->isUser());
 
         return Response::json([
-            'result' => Auth::user()->orderItems()->where('type', FoodType::Extra->value)->get(),
+            'result' => Auth::user()->orderItems()->where('type', FoodType::EXTRA->value)->get(),
             'message' => 'All User extras ordered'
         ]);
     }

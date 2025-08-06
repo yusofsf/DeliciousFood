@@ -4,7 +4,7 @@ namespace App\Enums;
 
 enum FoodType: string
 {
-    case Burger = 'burger';
-    case Sandwich = 'sandwich';
-    case Extra = 'extra';
+    case BURGER = 'burger';
+    case SANDWICH = 'sandwich';
+    case EXTRA = 'extra';
 }

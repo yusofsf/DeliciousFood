@@ -17,7 +17,7 @@ class FoodController extends Controller
     {
         return Response::json([
             'result' => FoodResource::collection(Food::all()
-                ->whereIn('type', [FoodType::Burger->value, FoodType::Sandwich->value])),
+                ->whereIn('type', [FoodType::BURGER->value, FoodType::SANDWICH->value])),
             'message' => 'All foods'
         ]);
     }
@@ -56,6 +56,7 @@ class FoodController extends Controller
         $validated = $request->validated();
 
         $image = null;
+
         if (array_key_exists('image', $validated)) {
             $image = time() . '.' . $validated['image']->getClientOriginalExtension();
             $validated['image']->move(public_path('images/' . $food->type . 's'), $image);
@@ -80,7 +81,7 @@ class FoodController extends Controller
 
         return Response::json([
             'result' => FoodResource::collection(Food::all()
-                ->whereIn('type', [FoodType::Burger->value, FoodType::Sandwich->value])),
+                ->whereIn('type', [FoodType::BURGER->value, FoodType::SANDWICH->value])),
             'message' => 'food deleted'
         ]);
     }
@@ -88,7 +89,7 @@ class FoodController extends Controller
     public function burgers(): JsonResponse
     {
         return Response::json([
-            'result' => FoodResource::collection(Food::all()->where('type', FoodType::Burger->value)),
+            'result' => FoodResource::collection(Food::all()->where('type', FoodType::BURGER->value)),
             'message' => 'all burgers'
         ]);
     }
@@ -96,7 +97,7 @@ class FoodController extends Controller
     public function sandwiches(): JsonResponse
     {
         return Response::json([
-            'result' => FoodResource::collection(Food::all()->where('type', FoodType::Sandwich->value)),
+            'result' => FoodResource::collection(Food::all()->where('type', FoodType::SANDWICH->value)),
             'message' => 'all sandwiches'
         ]);
     }
@@ -104,7 +105,7 @@ class FoodController extends Controller
     public function extras(): JsonResponse
     {
         return Response::json([
-            'result' => FoodResource::collection(Food::all()->where('type', FoodType::Extra->value)),
+            'result' => FoodResource::collection(Food::all()->where('type', FoodType::EXTRA->value)),
             'message' => 'all extras'
         ]);
     }

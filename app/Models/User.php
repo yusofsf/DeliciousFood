@@ -39,7 +39,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
     ];
     protected $attributes = [
-        'role' => UserRole::User->value
+        'role' => UserRole::USER->value
     ];
 
     public function foods(): HasMany
@@ -59,12 +59,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isUser(): bool
     {
-        return $this->role === UserRole::User->value;
+        return $this->role === UserRole::USER->value;
     }
 
     public function isAdmin(): bool
     {
-        return $this->role === UserRole::Admin->value;
+        return $this->role === UserRole::ADMIN->value;
     }
 
     public function orderItems(): HasManyThrough
